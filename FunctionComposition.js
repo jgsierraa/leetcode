@@ -9,13 +9,17 @@ You may assume each function in the array accepts one integer as input and retur
  * @return {Function}
  */
 var compose = function(functions) {
-    let auxFunction = functions.shift();
-    if(!functions){
-        return function(x) {
-           return x; 
+    if(functions.length < 1){
+        return function(x){
+            return x
+        };
+    }
+   return function(x) {  
+        for(let i = functions.length - 1; i >= 0; --i){
+            x = functions[i](x)
         }
-    return function(auxFunction(compose(functions)));
-    };
+       return x;
+   }
 }
 
 
